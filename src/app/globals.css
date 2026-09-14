@@ -1,26 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --color-void: #000000;
+  --color-deep: #050505;
+  --color-surface: #0a0a0a;
+  --color-elevated: #141414;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #000000;
+    color: #ffffff;
+    font-family: var(--font-body);
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background-color: #000000;
+    color: #ffffff;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom Text & Glow Utilities */
+.glow-text {
+  background: linear-gradient(180deg, #ffffff 0%, #a3a3a3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.35));
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #737373 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.constellation-line {
+  stroke: #ffffff;
+  stroke-width: 1;
+  opacity: 0.15;
+  stroke-dasharray: 4 4;
+}
+
+/* Keyframe Animations */
+@keyframes nodePulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.15); }
+  50% { box-shadow: 0 0 16px rgba(255, 255, 255, 0.8), 0 0 35px rgba(255, 255, 255, 0.3); }
+}
+
+@keyframes orbitSpin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.animate-orbit-spin {
+  animation: orbitSpin 30s linear infinite;
+}
+
+.animate-float {
+  animation: float 14s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: float 16s ease-in-out infinite reverse;
+}
+
+.animate-node-pulse {
+  animation: nodePulse 2s ease-in-out infinite;
+}
+
+/* Selection */
+::selection {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
 }
